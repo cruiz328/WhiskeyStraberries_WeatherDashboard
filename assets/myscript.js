@@ -1,9 +1,9 @@
 console.log('hey handsome');
-const lat = 33.44
-const lon = -94.04
-
+const lat = //?????
+console.log(lat);
+const lon = //?????
+console.log(log);
 const APIKey = `050e404c2fb641bab9615053ab364bda`;
-
 //  AJAX call to get current weather info
 $.ajax({
     url: `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${APIKey}`,
@@ -16,7 +16,7 @@ $.ajax({
 
   //  AJAX call to get geo coding api coordinates using zip codes
   //  for the current weather API
-  const limit = 5
+  const limit = 10
   const cityName = 'antioch'
   const stateCode = 'california'
   const countryCode = 'unitedStatesOfAmerica'
