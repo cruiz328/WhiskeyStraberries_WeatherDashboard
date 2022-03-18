@@ -1,31 +1,65 @@
 console.log('hey handsome');
-const lat = //?????
-console.log(lat);
-const lon = //?????
-console.log(log);
+let lat;
+// console.log(lat);
+let lon;
+// console.log(log);
 const APIKey = `050e404c2fb641bab9615053ab364bda`;
 //  AJAX call to get current weather info
-$.ajax({
-    url: `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${APIKey}`,
 
-  }).done(function(response) {
-    // $( '#seasearch' ).addClass( "done" );
-    console.log(response);
-  });
 
 
   //  AJAX call to get geo coding api coordinates using zip codes
   //  for the current weather API
-  const limit = 10
-  const cityName = 'antioch'
-  const stateCode = 'california'
-  const countryCode = 'unitedStatesOfAmerica'
+ 
+  
+function getWeather(state) {
+
 $.ajax({
-  url: `http://api.openweathermap.org/geo/1.0/direct?q=${cityName},${stateCode},${countryCode}&limit=${limit}&appid=${APIKey}`,
+  url: `http://api.openweathermap.org/geo/1.0/direct?q=${state}&limit=10&appid=${APIKey}`,
 }).done(function(response) {
-  console.log(response);
+   lat = response[0].lat;
+   lon = response[0].lon;
+   $.ajax({
+    url: `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${APIKey}`,
+  
+  }).done(function(response) {
+    // $( '#seasearch' ).addClass( "done" );
+    console.log(response);
+    let daily = response.daily;
+    let current = response.current;  
+    console.log(daily, current)
+    // dynamically creating an html element displaying
+    // the "current" weather with its specific data set
+      // Current 'Cloud' Data Set
+    const currentDisplay_Clouds = $('<tr>');
+    const currentCloud =$('<th>');
+    currentCloud.html(current.clouds);
+    currentDisplay_Clouds.append(currentCloud);
+    // Adding the 'currentWeatherDisplay' onto the html page
+    // to its corresponding column
+      $('#currentWeatherDisplay').append(currentDisplay_Clouds);
+      // Current 'Temperature' Data Set
+      const currentDisplay_Temp = $('<tr>');
+      const currentTemp =$('<th>');
+      currentTemp.html(current.temp);
+      currentDisplay_Temp.append(currentTemp);
+      $('#currentWeatherDisplay').append(currentDisplay_Temp);
+      // Current 'Humidity' Data Set
+      // Current 'Weather Conditions' Data Set
+      // Current 'Wind Speed' Data Set
+      // Current 'UV Index' Data Set
+      const currentDisplay_Uvi = $('<tr>');
+      const currentUvi =$('<th>');
+      currentUvi.html(current.uvi);
+      currentDisplay_Uvi.append(currentUvi);
+      $('#currentWeatherDisplay').append(currentDisplay_Uvi);
+  });
+
+
 
 });
+}
+
 
 
   //https://api.openweathermap.org/data/2.5/onecall?lat=33.44&lon=-94.04&exclude=hourly,daily&appid={API key}
@@ -39,6 +73,8 @@ $.ajax({
 
   })
 
+
+
   function AddState() {
     $('#display-states').empty()
     for (var i = 0; i < statesArr.length; i++) {
@@ -50,3 +86,8 @@ $.ajax({
     }
   }
  
+  $(document).on('click', '.showWeather', function(e){
+    e.preventDefault();
+    console.log($(this).html());
+    getWeather($(this).html());
+  })
