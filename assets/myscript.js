@@ -45,8 +45,24 @@ $.ajax({
       currentDisplay_Temp.append(currentTemp);
       $('#currentWeatherDisplay').append(currentDisplay_Temp);
       // Current 'Humidity' Data Set
+      const currentDisplay_Humidity = $('<tr>');
+      const currentHumidity =$('<th>');
+      currentHumidity.html(current.humidity);
+      currentDisplay_Humidity.append(currentHumidity);
+      $('#currentWeatherDisplay').append(currentDisplay_Humidity);
       // Current 'Weather Conditions' Data Set
+      const currentDisplay_Weather = $('<tr>');
+      const currentWeather =$('<th>');
+      currentWeather.html(current.Weather);
+      currentDisplay_Weather.append(currentWeather);
+      $('#currentWeatherDisplay').append(currentDisplay_Weather);
+      console.log('weather data set test')
       // Current 'Wind Speed' Data Set
+      const currentDisplay_Wind_speed = $('<tr>');
+      const currentWind_speed =$('<th>');
+      currentWind_speed.html(current.Wind_speed);
+      currentDisplay_Wind_speed.append(currentWind_speed);
+      $('#currentWeatherDisplay').append(currentDisplay_Wind_speed);
       // Current 'UV Index' Data Set
       const currentDisplay_Uvi = $('<tr>');
       const currentUvi =$('<th>');
